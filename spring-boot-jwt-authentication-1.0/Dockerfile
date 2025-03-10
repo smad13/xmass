@@ -1,29 +1,26 @@
 # Etapa de construcción
 FROM eclipse-temurin:17-jdk AS build
 
-# Establece el directorio de trabajo
 WORKDIR /app
 
-# Copia los archivos del proyecto
-COPY . .
+# Copiar solo el archivo pom.xml y descargar dependencias
+COPY pom.xml mvnw mvnw.cmd ./
+COPY .mvn .mvn
+RUN chmod +x mvnw && ./mvnw dependency:go-offline
 
-# Da permisos de ejecución al wrapper de Maven
-RUN chmod +x mvnw
+# Copiar el código fuente después de descargar dependencias
+COPY src src
 
-# Construye la aplicación
+# Construir la aplicación
 RUN ./mvnw clean package -DskipTests
 
 # Segunda etapa: Crear imagen final más liviana
 FROM eclipse-temurin:17-jre
-
-# Establece el directorio de trabajo
 WORKDIR /app
 
-# Copia el JAR generado en la primera etapa
+# Copiar el JAR generado
 COPY --from=build /app/target/*.jar app.jar
 
-# Expone el puerto de la aplicación
 EXPOSE 8080
 
-# Comando para ejecutar la aplicación
 CMD ["java", "-jar", "app.jar"]
