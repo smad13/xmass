@@ -39,6 +39,9 @@ public class ControladorVendedor {
     //Reportes
     @GetMapping("/vendedor/REPORTES")
     public String mostrarReportes() {
+
+
+        
         return "dashboard-vendedor/reportes";
     }
 

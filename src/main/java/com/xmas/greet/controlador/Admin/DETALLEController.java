@@ -37,10 +37,6 @@ public String listarDETALLES(Model model) {
 }
 
 
-    @GetMapping("/REPORTES")
-    public String mostrarReportes() {
-        return "reportes";
-    }
 
     @PostMapping("/GUARDAR")
     public String guardarDETALLE(@ModelAttribute DETALLE detalle, BindingResult bindingResult, Model model) {
