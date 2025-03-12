@@ -58,7 +58,7 @@ public class Controlador {
 
     @GetMapping("/login")
 	public String iniciarSesion() {
-		return "/login";
+		return "login";
 	}
 
 	
