@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.irojas.demojwt.DemoJwtApplicationTests
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 34.534 s - in com.irojas.demojwt.DemoJwtApplicationTests
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 24.745 s - in com.irojas.demojwt.DemoJwtApplicationTests
