@@ -72,74 +72,36 @@ public class ProductController {
         @RequestParam String name,
         @RequestParam Double price,
         @RequestParam String description,
-        @RequestParam Long categoryId,
         @RequestParam int stock,
+        @RequestParam Long categoryId,
         @RequestParam(required = false) MultipartFile imageFile,
         RedirectAttributes redirectAttributes
     ) {
-        try {
-            Optional<Category> categoryOptional = Optional.ofNullable(categoryService.obtenerCategoriaPorId(categoryId));
-            if (categoryOptional.isEmpty()) {
-                redirectAttributes.addFlashAttribute("Mensaje_Error", "Categoría no encontrada");
-                return "redirect:/product/all";
-            }
-            Product product = new Product();
-            product.setName(name);
-            product.setPrice(price);
-            product.setDescription(description);
-            product.setCategoria(categoryOptional.get());
-            product.setStock(stock);
-            if (imageFile != null && !imageFile.isEmpty()) {
-                product.setImagen(imageFile.getBytes());
-            }
-            productService.saveProduct(product);
-            redirectAttributes.addFlashAttribute("Mensaje_Guardado", "El producto fue guardado correctamente");
-        } catch (IOException e) {
-            redirectAttributes.addFlashAttribute("Mensaje_Error", "Error al guardar el producto");
-        }
-        return "redirect:/product/all";
-    }
-
-    @PostMapping("/update/{product_id}")
-    public String updateProduct(
-        @PathVariable("product_id") String productId,
-        @RequestParam String name,
-        @RequestParam Double price,
-        @RequestParam String description,
-        @RequestParam Long categoryId,
-        @RequestParam int stock,
-        @RequestParam(required = false) MultipartFile imageFile,
-        RedirectAttributes redirectAttributes
-    ) {
-        Optional<Product> existingProduct = productService.getProductById(productId);
-        if (existingProduct.isEmpty()) {
-            redirectAttributes.addFlashAttribute("Mensaje_NotFound", "Producto no encontrado");
-            return "redirect:/product/all";
-        }
         Optional<Category> categoryOptional = Optional.ofNullable(categoryService.obtenerCategoriaPorId(categoryId));
         if (categoryOptional.isEmpty()) {
             redirectAttributes.addFlashAttribute("Mensaje_Error", "Categoría no encontrada");
             return "redirect:/product/all";
         }
-        Product product = existingProduct.get();
+    
+        Product product = new Product();
         product.setName(name);
         product.setPrice(price);
         product.setDescription(description);
         product.setCategoria(categoryOptional.get());
         product.setStock(stock);
+    
         try {
-            if (imageFile != null && !imageFile.isEmpty()) {
-                product.setImagen(imageFile.getBytes());
-            }
-        } catch (IOException e) {
-            redirectAttributes.addFlashAttribute("Actualiza_Error", "Error al actualizar producto");
+            productService.saveProduct(product, imageFile);
+            redirectAttributes.addFlashAttribute("Mensaje_Guardado", "El producto fue guardado correctamente");
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("Mensaje_Error", "Error al guardar el producto");
         }
-        productService.saveProduct(product);
-        redirectAttributes.addFlashAttribute("Actualizar_producto", "Se guardó correctamente");
+    
         return "redirect:/product/all";
     }
+    
+    
 
-
-
+  
 
 }

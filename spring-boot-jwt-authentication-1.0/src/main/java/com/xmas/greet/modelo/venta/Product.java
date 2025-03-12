@@ -46,10 +46,13 @@ public class Product {
     @Getter @Setter
     private int stock;  
 
-    @Lob  
+    @Lob
     @Getter @Setter
-    @Column(columnDefinition = "LONGBLOB")
+    @Column(name = "imagen", columnDefinition = "BYTEA")
     private byte[] imagen;
+    
+
+
     @Getter @Setter
     @Transient
     private String base64Image;

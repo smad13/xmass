@@ -1,10 +1,12 @@
 package com.xmas.greet.servicio.venta;
 
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.xmas.greet.modelo.venta.Product;
 import com.xmas.greet.repositorio.venta.ProducRepository;
@@ -20,9 +22,21 @@ public class ProductService {
         this.producRepository = productRepository;
     }
     
-    public void saveProduct(Product product){
-        this.producRepository.save(product);
+    public Product saveProduct(Product product, MultipartFile imageFile) {
+        try {
+            if (imageFile != null && !imageFile.isEmpty()) {
+                // Se convierte correctamente a byte[]
+                product.setImagen(imageFile.getBytes());
+            } else {
+                // Asegurarse de asignar null si no se recibe imagen
+                product.setImagen(null);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException("Error al procesar la imagen", e);
+        }
+        return producRepository.save(product);
     }
+
    public List<Product> getAllProducts(){
         return this.producRepository.findAll();
    }
@@ -36,6 +50,7 @@ public class ProductService {
    public List<Product> getBestPriceProducts(){
         return this.producRepository.findFirst4ByOrderByPriceAsc();
    }
+   
    public void reduceStock(String productId, int quantity) {
     Product product = producRepository.findById(productId).orElseThrow();
     if (product.getStock() < quantity) {
