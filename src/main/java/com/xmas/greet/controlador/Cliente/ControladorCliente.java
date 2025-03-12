@@ -97,7 +97,7 @@ public String informacionById(@PathVariable("product_id") String productId, Mode
     }
 
     model.addAttribute("product", product);
-    return "/dashboard-cliente/Product-detalle";
+    return "dashboard-cliente/Product-detalle";
 }
 
 @GetMapping("/carrito-pedido")
@@ -111,7 +111,7 @@ public String formPedido( Model model) {
 		}
 	});
 	model.addAttribute("products", products);
-	return "/dashboard-cliente/carrito-pedido";
+	return "dashboard-cliente/carrito-pedido";
 }
 
 

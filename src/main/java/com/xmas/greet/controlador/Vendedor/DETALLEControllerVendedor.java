@@ -41,7 +41,7 @@ public class DETALLEControllerVendedor {
 public String listarDETALLES(Model model) {
     List<DETALLE> detalles = service.listarTodas();
     model.addAttribute("DETALLES", detalles);
-    return "/dashboard-vendedor/DETALLE-lista";
+    return "dashboard-vendedor/DETALLE-lista";
 }
 
 
@@ -49,7 +49,7 @@ public String listarDETALLES(Model model) {
     @PostMapping("/GUARDAR")
     public String guardarDETALLE(@ModelAttribute DETALLE detalle, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
-            return "/dashboard-vendedor/DETALLE-form";
+            return "dashboard-vendedor/DETALLE-form";
         }
 
         if (detalle.getCantidad() != null && detalle.getCantidad() > 0 &&

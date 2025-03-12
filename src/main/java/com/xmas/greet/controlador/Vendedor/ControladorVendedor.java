@@ -33,7 +33,7 @@ public class ControladorVendedor {
                 .anyMatch(rol -> rol.getNombre().equals("ROLE_CLIENTE")))
             .collect(Collectors.toList());
 			model.addAttribute("clientes", clientes);
-		return "/dashboard-vendedor/clientes";
+		return "dashboard-vendedor/clientes";
 	}
 
     //Reportes

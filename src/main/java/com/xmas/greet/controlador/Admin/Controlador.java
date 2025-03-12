@@ -64,7 +64,7 @@ public class Controlador {
 	
 	@GetMapping("/admin/dashboard")
 	public String verPaginaDeInicio(Model model) {
-		return "/dashboard/index";
+		return "dashboard/index";
 
 	}
 
@@ -76,7 +76,7 @@ public class Controlador {
                 .anyMatch(rol -> rol.getNombre().equals("ROLE_CLIENTE")))
             .collect(Collectors.toList());
 			model.addAttribute("clientes", clientes);
-		return "/dashboard/clientes";
+		return "dashboard/clientes";
 	}
 
 	@GetMapping("/empleados")
@@ -128,7 +128,7 @@ public class Controlador {
     }
 	@GetMapping("/recuperar")
     public String recuperar() {
-        return "/recuperar";
+        return "recuperar";
     }
 
 	
