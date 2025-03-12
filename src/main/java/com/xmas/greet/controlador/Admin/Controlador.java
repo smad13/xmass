@@ -117,7 +117,7 @@ public class Controlador {
 
 	@GetMapping("/REPORTES")
     public String mostrarReportes() {
-        return "dashboard/reportes";
+        return "dashboard/REPORTES";
     }
 
 
