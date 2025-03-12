@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administrador CNJJ</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/dashboard/listaa.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <aside>
+            <div class="top">
+                <div class="logo">
+                    <img th:src="@{/img/Log_peluches.png}" alt="Logo"/>
+                    <p th:if="${#authentication != null}">
+                        Bienvenido, <span th:text="${#authentication.name}"></span>
+                      </p>
+                </div>
+                <div class="close" id="close-btn">
+                    <span class="material-icons-sharp">close</span>
+                </div>
+            </div>
+            <div class="sidebar">
+                <a href="/admin/dashboard">
+                    <span class="material-icons-sharp">grid_view</span>
+                    <h3>Panel</h3>
+                </a>
+                </a>
+                <a href="/clientes" >
+                    <span class="material-icons-sharp">account_circle</span>
+                    <h3>Clientes</h3>
+                </a>
+                <a href="/PEDIDO/LISTA" class="active">
+                    <span class="material-icons-sharp">receipt_long</span>
+                    <h3>Ordenes</h3>
+                  </a>
+
+                  <a href="/ventas" >
+                    <span class="material-icons-sharp">receipt_long</span>
+                    <h3>Ventas</h3>
+                  </a>
+                  
+                <a href="/REPORTES">
+                    <span class="material-icons-sharp">insights</span>
+                    <h3>Analítica</h3>
+                </a>
+                <a href="/product/all">
+                    <span class="material-icons-sharp">inventory</span>
+                    <h3>Productos</h3>
+                </a>
+                <a href="/MATERIAL">
+                    <span class="material-icons-sharp">report_gmailerrorred</span>
+                    <h3>Materiales</h3>
+                </a>
+                <a href="/empleados" >
+                    <span class="material-icons-sharp">account_circle</span>
+                    <h3>Empleados</h3>
+                </a>
+                <a th:href="@{/logout}">
+
+                    <span class="material-icons-sharp">logout</span>
+                    <h3>Cerrar Sesión</h3>
+                </a>
+            </div>
+        </aside>
+
+
+        <main role="main">
+            <h1>Ordenes</h1>
+            <h2>Lista de Pedidos</h2>
+            <div>
+                <a th:href="@{/exporter/PEDIDO/EXPORTAR-PDF}" class="btn btn-pdf">
+                    <i class="fas fa-file-pdf"></i> Generar PDF
+                  </a>
+                  <a th:href="@{/exporter/PEDIDO/ExportarExcel}" class="btn btn-excel">
+                    <i class="fas fa-file-excel"></i> Generar Excel
+                  </a>
+                 
+                <a th:href="@{/PEDIDO/NUEVO}" class="btn btn-add">
+                    <i class="fas fa-plus"></i> Nuevo Pedido
+                </a>
+                <a th:href="@{/DETALLE/LISTA}" class="btn btn-add">
+                    <i class="fas fa-plus"></i> Detalles
+                </a>
+                                 
+            </div>
+            <table id="productTable">
+                <thead>
+                    <tr>
+                        <th>Id Pedido</th>
+
+                        <th>Dirección de Envío</th>
+                        <th>Valor Total</th>
+                        <th>Id Cliente</th>
+                        <th>Estado</th>
+                        <th>Editar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="PEDIDO : ${PEDIDOS}">
+                        <td th:text="${PEDIDO.id_pedido}"></td>
+                        <td th:text="${PEDIDO.direccion_envio}"></td>
+                        <td th:text="${PEDIDO.valor_total}"></td>
+                        <td th:text="${PEDIDO.id_cliente}"></td>
+                        <td>
+                            <span th:text="${PEDIDO.estado}"
+                                th:classappend="|${PEDIDO.estado == 'PENDIENTE' ? 'PENDIENTE' : (PEDIDO.estado == 'ENTREGADO' ? 'ENTREGADO' : 'CANCELADO')}|">
+                            </span>
+
+                        </td>
+                        <td>
+                            <a th:href="@{'/PEDIDO/EDITAR/' + ${PEDIDO.id_pedido}}" class="editar-btn">Editar</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="pagination"></div>
+        </main>
+
+        <div class="right">
+            <div class="top">
+              <button id="menu-btn">
+                <span class="material-icons-sharp">menu</span>
+              </button>
+              <div class="theme-toggler">
+                <span class="material-icons-sharp active">light_mode</span>
+                <span class="material-icons-sharp">dark_mode</span>
+              </div>
+            </div>
+            
+            <!-- Sección de lista de Chats -->
+            <div class="chat-list">
+              <div class="header">
+                <h2>Chats</h2>
+                <button id="newChatBtn" class="button">Nuevo Chat</button>
+              </div>
+              <div id="chatContainer">
+                <!-- Aquí se cargarán dinámicamente los chats -->
+              </div>
+            </div>
+            
+            <!-- Slider lateral para el chat seleccionado -->
+            <div id="chatSlider" class="chat-slider">
+              <div class="slider-header">
+                <h2 id="chatTitle"></h2>
+                <button id="closeSliderBtn">
+                  <span class="material-icons-sharp">close</span>
+                </button>
+              </div>
+              <div id="chatMessages" class="chat-messages">
+                <!-- Aquí se mostrarán los mensajes en tiempo real -->
+              </div>
+              <div class="chat-input">
+                <input type="text" id="messageInput" placeholder="Escribe un mensaje..." />
+                <button id="sendMessageBtn">
+                  <span class="material-icons-sharp">send</span>
+                </button>
+              </div>
+            </div>
+            
+            <!-- Modal personalizado para crear un nuevo chat -->
+            <div id="chatModal" class="modal">
+              <div class="modal-content">
+                <span id="closeModal" class="close">&times;</span>
+                <h2>Crear Nuevo Chat</h2>
+                <form id="newChatForm">
+                  <label for="chatName">Nombre del Chat:</label>
+                  <input type="text" id="chatName" name="chatName" required>
+                  <label for="user2Correo">Correo del Usuario:</label>
+                  <input type="email" id="user2Correo" name="user2Correo" required>
+                  <button type="submit">Crear Chat</button>
+                </form>
+              </div>
+            </div>
+          </div>
+    <script th:src="@{/js/dashboard/chat.js}"></script>
+    <script th:src="@{/js/dashboard/index.js}"></script>
+    <script th:src="@{/js/dashboard/paginacion.js}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.5.1/sockjs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+</body>
+</html>

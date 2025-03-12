@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>XMAS</title>
+    <link rel="stylesheet" th:href="@{/css/inicio/style.css}">
+    <link rel="stylesheet" th:href="@{/css/inicio/carito.css}">
+
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/inicio/banner.css}">
+   <link href="https://fonts.googleapis.com/css2?family=Gasoek+One&display=swap" rel="stylesheet">
+   <!-- En el head de tu documento -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTTXRN0YkV+6Cw5YsK8aL9j1jk0+0qF6KtWlfmYF0U1Rr/6B9Sg2Z9j9mX0MJIQfN1eCM05jkw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<STyle>
+    .dropdown-custom {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-btn {
+  background: linear-gradient(135deg, #FF7F7F, #FF7F7F);
+  border: none;
+  border-radius: 30px;
+  padding: 10px 20px;
+  margin: 10px;
+  cursor: pointer;
+  color: #fff;
+  font-family: 'Roboto', sans-serif;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.dropdown-btn i {
+  margin-right: 10px;
+  font-size: 20px;
+}
+
+.dropdown-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+.dropdown-btn:focus {
+  outline: none;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  right: 0;
+  background-color: #fff;
+  min-width: 200px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  z-index: 999;
+  margin-top: 5px;
+  overflow: hidden;
+}
+
+/* Estilo para los botones desplegados */
+.dropdown-content a {
+  display: flex;
+  align-items: center;
+  padding: 12px 20px;
+  margin: 5px 10px;
+  text-decoration: none;
+  color: #333;
+  background: linear-gradient(90deg, #ffffff, #f9f9f9);
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Estilo para los iconos dentro de cada botón */
+/* Estilo mejorado para los botones desplegados */
+.dropdown-content a {
+  display: flex;
+  align-items: center;
+  padding: 12px 20px;
+  margin: 5px 10px;
+  text-decoration: none;
+  color: #333;
+  background: linear-gradient(90deg, #ffffff, #f9f9f9);
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+
+.dropdown-content a:hover {
+  transform: scale(1.03);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  background: linear-gradient(90deg, #fefefe, #f0f0f0);
+}
+
+.perfil-container {
+      max-width: 600px;
+      margin: 30px auto;
+      background-color: #f8f8f8;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 20px;
+    }
+    .perfil-header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .perfil-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      color: #333;
+    }
+    .perfil-list li {
+      padding: 10px 0;
+      border-bottom: 1px solid #ddd;
+    }
+    .perfil-list li:last-child {
+      border-bottom: none;
+    }
+    .perfil-list li strong {
+      color: #656286;
+      font-family: 'Gasoek One', sans-serif;
+    }
+    .perfil-list li span {
+      font-family: 'Roboto', sans-serif;
+      color: #000;
+      font-size: 1.2rem;
+    }
+    /* Opcional: al pasar el mouse se cambia el color, en línea con tu estilo */
+    .perfil-list li:hover span {
+      color: #FF7F7F;
+      cursor: default;
+    }
+
+</STyle>
+</head>
+<div class=" header">
+  <!-- Head con imagen, título y iconos -->
+  <div class="row align-items-center justify-content-center mt-3">
+    <div class="col-md-2 text-center">
+      <img th:src="@{/img/Log_peluches.png}" alt="Logo" class="header-image" />
+    </div>
+    <div class="col-md-8 text-center position-relative">
+      <h1 class="text">¡Bienvenido a tu Tienda Virtual</h1>
+    </div>
+  </div>
+</div>
+
+
+<!-- Header con barra de navegación -->
+    <nav class="navbar navbar-expand-lg navbar-light nav mt-3">
+    <!-- Botón hamburguesa (puedes dejarlo si quieres seguir usando el collapse de Bootstrap en móvil) -->
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-toggle="collapse"
+      data-target="#navbarNav"
+      aria-controls="navbarNav"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <!-- Menú principal -->
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/cliente/dashboard">Inicio</a>
+        </li>
+        <!-- Se ELIMINA el enlace "Nosotros" -->
+        <!--
+        <li class="nav-item">
+          <a class="nav-link" href="/nosotros">Nosotros</a>
+        </li>
+        -->
+        <li class="nav-item">
+          <a class="nav-link" href="/cliente/catalogo">Nuestros Productos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" id="abrir-carrito">Carrito (<span id="cart-count">0</span>)</a>
+        </li>
+      </ul>
+
+      <!-- Botones existentes (Ubicación, Productos, Contactanos) -->
+
+
+      <!-- Nuevo dropdown personalizado  -->
+   <ul class="navbar-nav">
+    <li class="nav-item dropdown-custom">
+      <button class="dropdown-btn">
+        <img 
+        th:src="@{/img/inicio/diseño/hat_3140126.png}" 
+        alt="Login Icon" 
+        style="width:20px; height:20px; margin-right:5px; vertical-align:middle;"
+      />>
+        <i class="fas fa-info-circle"></i>
+Bienvenido
+      </button>
+      <div class="dropdown-content">
+        <a href="#"><i class="fas fa-user"></i> Mi cuenta</a>
+        <a href="#"><i class="fas fa-box"></i> Mis pedidos</a>
+        <a href="#"><i class="fas fa-sign-out-alt"></i> Salir</a>
+      </div>
+    </li>
+  </ul>
+    </div>
+  </nav>
+  <main>
+    <div th:if="${pedidos != null and !pedidos.isEmpty()}">
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>ID Pedido</th>
+                    <th>Dirección de Envío</th>
+                    <th>Valor Total</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="pedido : ${pedidos}">
+                    <td th:text="${pedido.id_pedido}">ID</td>
+                    <td th:text="${pedido.direccion_envio}">Dirección</td>
+                    <td th:text="${pedido.valor_total}">Valor</td>
+                    <td th:text="${pedido.estado}">Estado</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div th:if="${pedidos == null or pedidos.isEmpty()}">
+        <p>No tienes pedidos registrados.</p>
+    </div>
+  </main>
+  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+  <script th:src="@{js/banner.js}"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const dropdownBtn = document.querySelector('.dropdown-btn');
+      const dropdownContent = document.querySelector('.dropdown-content');
+
+      // Al hacer clic en el botón "Hola, Andres", mostramos/ocultamos el menú
+      dropdownBtn.addEventListener('click', function(event) {
+        event.preventDefault();
+        if (dropdownContent.style.display === 'block') {
+          dropdownContent.style.display = 'none';
+        } else {
+          dropdownContent.style.display = 'block';
+        }
+      });
+
+      // Cerrar el dropdown si se hace clic fuera de él
+      window.addEventListener('click', function(e) {
+        if (!dropdownBtn.contains(e.target) && !dropdownContent.contains(e.target)) {
+          dropdownContent.style.display = 'none';
+        }
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>XMAS</title>
+    <link rel="stylesheet" th:href="@{/css/inicio/style.css}">
+    <link rel="stylesheet" th:href="@{/css/inicio/carito.css}">
+
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/inicio/banner.css}">
+   <link href="https://fonts.googleapis.com/css2?family=Gasoek+One&display=swap" rel="stylesheet">
+   <!-- En el head de tu documento -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTTXRN0YkV+6Cw5YsK8aL9j1jk0+0qF6KtWlfmYF0U1Rr/6B9Sg2Z9j9mX0MJIQfN1eCM05jkw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+
+   <style>
+.dropdown-custom {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-btn {
+  background: linear-gradient(135deg, #FF7F7F, #FF7F7F);
+  border: none;
+  border-radius: 30px;
+  padding: 10px 20px;
+  margin: 10px;
+  cursor: pointer;
+  color: #fff;
+  font-family: 'Roboto', sans-serif;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.dropdown-btn i {
+  margin-right: 10px;
+  font-size: 20px;
+}
+
+.dropdown-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+.dropdown-btn:focus {
+  outline: none;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  right: 0;
+  background-color: #fff;
+  min-width: 200px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  z-index: 999;
+  margin-top: 5px;
+  overflow: hidden;
+}
+
+/* Estilo para los botones desplegados */
+.dropdown-content a {
+  display: flex;
+  align-items: center;
+  padding: 12px 20px;
+  margin: 5px 10px;
+  text-decoration: none;
+  color: #333;
+  background: linear-gradient(90deg, #ffffff, #f9f9f9);
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Estilo para los iconos dentro de cada botón */
+/* Estilo mejorado para los botones desplegados */
+.dropdown-content a {
+  display: flex;
+  align-items: center;
+  padding: 12px 20px;
+  margin: 5px 10px;
+  text-decoration: none;
+  color: #333;
+  background: linear-gradient(90deg, #ffffff, #f9f9f9);
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+
+.dropdown-content a:hover {
+  transform: scale(1.03);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  background: linear-gradient(90deg, #fefefe, #f0f0f0);
+}
+
+
+
+
+  /*nuevo*/
+
+    .carrito-sidebar {
+  position: fixed;
+  top: 0;
+  right: -350px;
+  width: 350px;
+  height: 100%;
+  background: #F7EDE2;
+  box-shadow: -2px 0 5px rgba(0,0,0,0.2);
+  transition: right 0.3s ease;
+  padding: 20px;
+  overflow-y: auto;
+  border-left: 3px solid #D1B28C;
+  z-index: 1000;
+}
+
+.carrito-sidebar.mostrar {
+  right: 0;
+}
+
+.icono-carrito {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #FF7F7F;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  z-index: 1100;
+}
+
+.icono-carrito img {
+  width: 40px;
+  height: 40px;
+}
+
+   </style>
+  </head>
+  <div class=" header">
+    <!-- Head con imagen, título y iconos -->
+    <div class="row align-items-center justify-content-center mt-3">
+      <div class="col-md-2 text-center">
+        <img th:src="@{/img/Log_peluches.png}" alt="Logo" class="header-image" />
+      </div>
+      <div class="col-md-8 text-center position-relative">
+        <h1 class="text">¡Bienvenido a tu Tienda Virtual</h1>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Header con barra de navegación -->
+      <nav class="navbar navbar-expand-lg navbar-light nav mt-3">
+      <!-- Botón hamburguesa (puedes dejarlo si quieres seguir usando el collapse de Bootstrap en móvil) -->
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <!-- Menú principal -->
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/cliente/dashboard">Inicio</a>
+          </li>
+          <!-- Se ELIMINA el enlace "Nosotros" -->
+          <!--
+          <li class="nav-item">
+            <a class="nav-link" href="/nosotros">Nosotros</a>
+          </li>
+          -->
+          <li class="nav-item">
+            <a class="nav-link" href="/cliente/catalogo">Nuestros Productos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" id="abrir-carrito">Carrito (<span id="cart-count">0</span>)</a>
+          </li>
+        </ul>
+
+        <!-- Botones existentes (Ubicación, Productos, Contactanos) -->
+        <div class="btn-group ml-auto">
+          <a href="#ubicacion" class="btn btn-secondary">Ubicación</a>
+          <a href="#destadas" class="btn btn-secondary">Productos</a>
+          <a href="#" class="btn btn-secondary" data-toggle="modal" data-target="#contactModal">Contactanos</a>
+        </div>
+
+        <!-- Nuevo dropdown personalizado  -->
+     <ul class="navbar-nav">
+      <li class="nav-item dropdown-custom">
+        <button class="dropdown-btn">
+          <img 
+          th:src="@{/img/inicio/diseño/hat_3140126.png}" 
+          alt="Login Icon" 
+          style="width:20px; height:20px; margin-right:5px; vertical-align:middle;"
+        />>
+          <i class="fas fa-info-circle"></i>
+Bienvenido
+        </button>
+        <div class="dropdown-content">
+          <a href="/cliente/perfil"><i class="fas fa-user"></i> Mi cuenta</a>
+          <a href="/cliente/mis-pedidos"><i class="fas fa-box"></i> Mis pedidos</a>
+          <a th:href="@{/logout}"><i class="fas fa-sign-out-alt"></i> Salir</a>
+        </div>
+      </li>
+    </ul>
+      </div>
+    </nav>
+
+    <!-- Carrito Sidebar -->
+    <div id="carrito-sidebar" class="carrito-sidebar">
+      <div class="carrito-header">
+        <h4>Tu Carrito</h4>
+        <button id="cerrar-carrito" class="btn btn-danger">X</button>
+      </div>
+      <div id="carrito-contenido">
+        <p>Tu carrito está vacío.</p>
+      </div>
+      <div class="carrito-footer">
+        <div class="total">
+          <span>Total: </span>
+          <span id="total-price">$0.00</span>
+        </div>
+        <button id="comprar-btn" class="btn btn-success" disabled>Comprar</button>
+      </div>
+      <div class="icono-carrito" id="icono-carrito">
+        <img src="/carrito-pedido" alt="Carrito">
+      </div>
+    </div>
+    <div class="icono-carrito" id="icono-carrito">
+      <img th:src="@{/img/inicio/diseño/shopping-cart_8331063.png}" alt="Carrito">
+    </div>
+
+    <main class="container py-5">
+      <div th:each="entry : ${productosPorCategoria}" class="mb-5">
+        <h2 th:text="${entry.key}" class="text-center text-black mb-4" style="font-family: 'Poppins', sans-serif;"></h2>
+        <div class="catalog-container">
+          <div class="row g-4">
+            <div class="col-md-4 col-lg-3" th:each="product : ${entry.value}">
+              <div class="card shadow-sm border-0 rounded">
+                <img th:src="'data:image/jpeg;base64,' + ${product.base64Image}" class="card-img-top" alt="Imagen del producto">
+                <div class="card-body text-center">
+                  <h5 class="card-title fw-bold" th:text="${product.name}" style="font-family: 'Poppins', sans-serif;"></h5>
+                  <p class="text-muted" style="font-family: 'Poppins', sans-serif;">
+                    Precio: $<span th:text="${product.price}"></span>
+                  </p>
+                  <button class="btn btn-danger w-100 agregar-carrito" th:data-id="${product.id}">Añadir al carrito</button>
+                  <a th:href="@{'/cliente/catalogo/' + ${product.id}}" class="btn btn-outline-primary w-100 mt-2">Ver más</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="category-divider"></div>
+      </div>
+    </main>
+
+    <script th:src="@{/js/inicio/carritoLogin.js}"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const dropdownBtn = document.querySelector('.dropdown-btn');
+        const dropdownContent = document.querySelector('.dropdown-content');
+
+        // Al hacer clic en el botón "Hola, Andres", mostramos/ocultamos el menú
+        dropdownBtn.addEventListener('click', function(event) {
+          event.preventDefault();
+          if (dropdownContent.style.display === 'block') {
+            dropdownContent.style.display = 'none';
+          } else {
+            dropdownContent.style.display = 'block';
+          }
+        });
+
+        // Cerrar el dropdown si se hace clic fuera de él
+        window.addEventListener('click', function(e) {
+          if (!dropdownBtn.contains(e.target) && !dropdownContent.contains(e.target)) {
+            dropdownContent.style.display = 'none';
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

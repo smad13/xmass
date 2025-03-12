@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>XMAS</title>
+
+    <link rel="stylesheet" th:href="@{/css/inicio/carito.css}" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Gasoek+One&display=swap" rel="stylesheet" />
+  </head>
+  <style>
+    /* Estilos específicos para la página de detalle del producto */
+    main.product-detail {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      /* Se añade mayor padding en la parte superior para separar del nav y márgenes laterales */
+      padding: 80px 40px 40px;
+      min-height: calc(100vh - 80px);
+      background-color: #f8f8f8; /* mismo color que en carito.css */
+    }
+    .product-container {
+      display: flex;
+      width: 90%;
+      max-width: 1400px;
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      margin: 0 20px; /* márgenes laterales para evitar que quede pegado al borde */
+    }
+    .product-image {
+      flex: 1;
+      background: #f0f0f0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+    .product-image img {
+      max-width: 100%;
+      max-height: 500px;
+      border-radius: 8px;
+      object-fit: cover;
+    }
+    .product-info {
+      flex: 1;
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .product-info h2 {
+      font-family: 'Gasoek One', sans-serif;
+      font-size: 3rem;
+      color: #FF7F7F;
+      margin-bottom: 20px;
+    }
+    .product-info .price,
+    .product-info .category,
+    .product-info .description {
+      font-family: 'Roboto', sans-serif;
+      font-size: 1.2rem;
+      color: #000;
+      margin-bottom: 20px;
+    }
+    .add-to-cart-btn {
+      align-self: flex-start;
+      padding: 15px 30px;
+      background-color: #dc3545;
+      color: #fff;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s;
+    }
+    .add-to-cart-btn:hover {
+      background-color: #E04E51;
+      transform: scale(1.05);
+    }
+    /* Responsividad */
+    @media (max-width: 768px) {
+      .product-container {
+        flex-direction: column;
+      }
+      .product-info {
+        padding: 20px;
+      }
+      .product-image {
+        padding: 10px;
+      }
+    }
+    .regresar{
+      align-self: flex-start;
+    padding: 10px 60px;
+    background-color: #007bff;
+    color: #fff;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: backgrou
+    }
+  </style>
+  <body>
+    <div class="header">
+      <!-- Head con imagen, título e iconos -->
+      <div class="row align-items-center justify-content-center mt-3">
+        <div class="col-md-2 text-center">
+          <img th:src="@{/img/Log_peluches.png}" alt="Logo" class="header-image" />
+        </div>
+        <div class="col-md-8 text-center position-relative">
+          <h1 class="text">¡Encuentra tu Muñeco Perfecto!</h1>
+        </div>
+        <div class="col-md-2 text-right icon-container">
+          <div class="icon-item">
+            <a th:href="@{/login}">
+              <img th:src="@{/img/inicio/diseño/hat_3140126.png}" alt="Icono 1" class="icon-image" />
+            </a>
+            <a th:href="@{/login}">
+              <p class="icon-text">Login</p>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Header con barra de navegación -->
+    <nav class="navbar navbar-expand-lg navbar-light nav mt-3">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item"><a class="nav-link" href="/index">Inicio</a></li>
+          <li class="nav-item"><a class="nav-link" href="/nosotros">Nosotros</a></li>
+          <li class="nav-item"><a class="nav-link" href="/catalogo">Nuestros Productos</a></li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" id="abrir-carrito">Carrito (<span id="cart-count">0</span>)</a>
+          </li>
+        </ul>
+        <div class="btn-group ml-auto">
+          <a href="#ubicacion" class="btn btn-secondary">Ubicación</a>
+          <a href="#destadas" class="btn btn-secondary">Productos</a>
+          <a href="#" class="btn btn-secondary" data-toggle="modal" data-target="#contactModal">Contactanos</a>
+        </div>
+      </div>
+    </nav>
+
+      <!--carrito con total -->
+     
+
+    <div id="carrito-sidebar" class="carrito-sidebar">
+        <div class="carrito-header">
+          <h4>Tu Carrito</h4>
+          <button id="cerrar-carrito" class="btn btn-danger">X</button>
+        </div>
+        <div id="carrito-contenido">
+          <p>Tu carrito está vacío.</p>
+        </div>
+    
+        <div class="carrito-footer">
+          <div class="total">
+            <span>Total: </span>
+            <span id="total-price">$0.00</span>
+          </div>
+          <button id="comprar-btn" class="btn btn-success" disabled>Comprar</button>
+        </div>
+        <div class="icono-carrito" id="icono-carrito">
+          <img src="/carrito-pedido" alt="Carrito">
+        </div>
+      </div>
+      <div class="icono-carrito" id="icono-carrito">
+        <img th:src="@{img/inicio/diseño/shopping-cart_8331063.png}" alt="Carrito">
+      </div>
+
+      <main class="product-detail">
+        <div class="product-container">
+          <!-- Sección Izquierda: Imagen del producto -->
+          <div class="product-image">
+            <img th:src="'data:image/jpeg;base64,' + ${product.base64Image}" alt="Imagen del Producto">
+          </div>
+          <!-- Sección Derecha: Información del producto -->
+          <div class="product-info">
+            <div>
+              <h2 class="card-title" th:text="${product.name}">Nombre del Producto</h2>
+              <p class="price text-muted">$<span th:text="${product.price}"></span></p>
+              <p class="category">Categoría: <span th:text="${product.categoria.nombre}"></span></p>
+              <p class="description" th:text="${product.description}"></p>
+            </div>
+            <button class="add-to-cart-btn agregar-carrito"th:data-id="${product.id}">Añadir al carrito</button>
+            <a href="/catalogo"><button class="regresar btn btn-primary">Regresar</button></a>
+          </div>
+        </div>
+      </main>
+      
+      
+   </body>
+   <script>
+    document.addEventListener("DOMContentLoaded", function() {
+    const abrirCarrito = document.getElementById("abrir-carrito");
+    const cerrarCarrito = document.getElementById("cerrar-carrito");
+    const carritoSidebar = document.getElementById("carrito-sidebar");
+    const carritoContenido = document.getElementById("carrito-contenido");
+    const totalPriceElem = document.getElementById("total-price");
+    const comprarBtn = document.getElementById("comprar-btn");
+    
+    // Si pudieras tener más de un icono, usamos querySelectorAll:
+    const iconosCarrito = document.querySelectorAll("#icono-carrito");
+    iconosCarrito.forEach(icono => {
+        icono.addEventListener("click", function(event) {
+            event.stopPropagation();
+            mostrarCarrito();
+        });
+    });
+
+    const cartCount = document.getElementById("cart-count");
+    let carrito = [];
+
+    // Función para guardar el carrito en localStorage
+    function guardarCarrito() {
+        localStorage.setItem("carrito", JSON.stringify(carrito));
+    }
+
+    // Función para cargar el carrito desde localStorage
+    function cargarCarrito() {
+        const carritoGuardado = localStorage.getItem("carrito");
+        if (carritoGuardado) {
+            carrito = JSON.parse(carritoGuardado);
+            actualizarCarrito();
+        }
+    }
+
+    function mostrarCarrito() {
+        carritoSidebar.classList.add("mostrar");
+    }
+
+    if (abrirCarrito) {
+        abrirCarrito.addEventListener("click", function(event) {
+            event.preventDefault();
+            event.stopPropagation();
+            mostrarCarrito();
+        });
+    }
+
+    cerrarCarrito.addEventListener("click", function(event) {
+        event.stopPropagation();
+        carritoSidebar.classList.remove("mostrar");
+    });
+
+    document.addEventListener("click", function(event) {
+        // Verifica que el click no sea en el sidebar, el enlace o alguno de los iconos
+        if (!carritoSidebar.contains(event.target) && 
+            !abrirCarrito.contains(event.target) &&
+            ![...iconosCarrito].some(icono => icono.contains(event.target))) {
+            carritoSidebar.classList.remove("mostrar");
+        }
+    });
+
+    carritoSidebar.addEventListener("click", function(event) {
+        event.stopPropagation();
+    });
+
+    // Evento para agregar productos al carrito (asegúrate de que tus botones tengan la clase "agregar-carrito")
+    document.querySelectorAll(".agregar-carrito").forEach(boton => {
+        boton.addEventListener("click", function(event) {
+            event.stopPropagation();
+            const id = this.getAttribute("data-id");
+            const nombre = this.parentElement.querySelector(".card-title")
+                ? this.parentElement.querySelector(".card-title").innerText
+                : "";
+            // Se extrae el precio eliminando caracteres no numéricos
+            const precio = parseFloat(
+                this.parentElement.querySelector(".text-muted")
+                    ? this.parentElement.querySelector(".text-muted").innerText.replace(/[^\d.]/g, "")
+                    : "0"
+            );
+            const imagen = this.parentElement.parentElement.querySelector("img").src;
+            const producto = { id, nombre, precio, imagen, cantidad: 1 };
+            const existe = carrito.find(item => item.id === id);
+
+            if (existe) {
+                existe.cantidad++;
+            } else {
+                carrito.push(producto);
+            }
+            actualizarCarrito();
+        });
+    });
+
+    function actualizarCarrito() {
+        carritoContenido.innerHTML = "";
+        let totalCantidad = 0;
+        let totalPrecio = 0;
+        carrito.forEach(producto => {
+            totalCantidad += producto.cantidad;
+            totalPrecio += producto.precio * producto.cantidad;
+            const item = document.createElement("div");
+            item.classList.add("carrito-item");
+            item.innerHTML = `
+                <img src="${producto.imagen}" alt="${producto.nombre}">
+                <div class="carrito-item-info">
+                    <p>${producto.nombre}</p>
+                    <p>$${producto.precio.toFixed(2)}</p>
+                    <div>
+                        <button onclick="modificarCantidad('${producto.id}', -1)">-</button>
+                        <span>${producto.cantidad}</span>
+                        <button onclick="modificarCantidad('${producto.id}', 1)">+</button>
+                        <button onclick="eliminarProducto('${producto.id}')">🗑</button>
+                    </div>
+                </div>
+            `;
+            carritoContenido.appendChild(item);
+        });
+        cartCount.innerText = totalCantidad;
+        totalPriceElem.innerText = "$" + totalPrecio.toFixed(2);
+        comprarBtn.disabled = carrito.length === 0;
+        guardarCarrito();
+    }
+
+    window.modificarCantidad = function(id, cantidad) {
+        const producto = carrito.find(item => item.id === id);
+        if (producto) {
+            producto.cantidad += cantidad;
+            if (producto.cantidad <= 0) {
+                carrito = carrito.filter(item => item.id !== id);
+            }
+            actualizarCarrito();
+        }
+    }
+
+    window.eliminarProducto = function(id) {
+        carrito = carrito.filter(item => item.id !== id);
+        actualizarCarrito();
+    }
+    comprarBtn.addEventListener("click", function() {
+        if (carrito.length > 0) {
+            // Guardar el carrito en localStorage antes de redirigir
+            localStorage.setItem("carrito", JSON.stringify(carrito));
+            
+            // Redirigir a la página del carrito
+            window.location.href = "/carrito-pedido";
+        }
+    });
+
+    // Al iniciar la página, se carga el carrito almacenado en localStorage
+    cargarCarrito();
+});
+   </script>
+   
+</html>

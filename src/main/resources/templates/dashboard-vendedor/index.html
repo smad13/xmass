@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administrador CNJJ</title>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" 
+    rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/dashboard/formulario.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+</head>
+<body>
+    <div class="container">
+        <aside>
+            <div class="top">
+                <div class="logo">
+                    <img th:src="@{/img/dashboard/Log_peluches.png}" alt="Logo"/>
+                    <p th:if="${#authentication != null}">
+                        Bienvenido, <span th:text="${#authentication.name}"></span>
+                      </p>
+                </div>
+                <div class="close" id="close-btn">
+                    <span class="material-icons-sharp">close</span>
+                </div>
+            </div>
+            <div class="sidebar">
+                <a href="/vendedor/dashboard" class="active">
+                    <span class="material-icons-sharp">grid_view</span>
+                    <h3>Panel</h3>
+                </a>
+                </a>
+                <a href="/vendedor/clientes" >
+                    <span class="material-icons-sharp">account_circle</span>
+                    <h3>Clientes</h3>
+                </a>
+                <a href="/vendedor/PEDIDO/LISTA" >
+                    <span class="material-icons-sharp">receipt_long</span>
+                    <h3>Ordenes</h3>
+                  </a>
+                  <a href="/vendedor/ventas" >
+                    <span class="material-icons-sharp">receipt_long</span>
+                    <h3>Ventas</h3>
+                  </a>
+                <a href="/vendedor/REPORTES">
+                    <span class="material-icons-sharp">insights</span>
+                    <h3>Analítica</h3>
+                </a>
+                <a href="/vendedor/product/all">
+                    <span class="material-icons-sharp">inventory</span>
+                    <h3>Productos</h3>
+                </a>
+        
+                <a th:href="@{/logout}">
+
+                    <span class="material-icons-sharp">logout</span>
+                    <h3>Cerrar Sesión</h3>
+                </a>
+            </div>
+        </aside>
+
+        <main>
+            <h1>Opciones</h1>
+
+            <div class="insights">
+                <div class="sales">
+                    <span class="material-icons-sharp">analytics</span>
+                    <div class="middle">
+                        <div class="left">
+                            <h3>Total Ventas</h3>
+                            <h1>$25.000</h1>
+                        </div>
+                        <div class="progress">
+                            <svg>
+                                <circle cx='38' cy='38' r='36'></circle>
+                            </svg>
+                            <div class="number">
+                                <p>81%</p>
+                            </div>
+                        </div>
+                    </div>
+                    <small class="text-muted">Ultimas 24 Horas</small>
+                </div>
+                <!-----------Fin Ventas---------->
+                <div class="expenses">
+                    <span class="material-icons-sharp">bar_chart</span>
+                    <div class="middle">
+                        <div class="left">
+                            <h3>Total Gastos</h3>
+                            <h1>$14.000</h1>
+                        </div>
+                        <div class="progress">
+                            <svg>
+                                <circle cx='38' cy='38' r='36'></circle>
+                            </svg>
+                            <div class="number">
+                                <p>62%</p>
+                            </div>
+                        </div>
+                    </div>
+                    <small class="text-muted">Ultimas 24 Horas</small>
+                </div>
+                <!-----------Fin Gastos---------->
+                <div class="income">
+                    <span class="material-icons-sharp">stacked_line_chart</span>
+                    <div class="middle">
+                        <div class="left">
+                            <h3>Total Ingresos</h3>
+                            <h1>$10.000</h1>
+                        </div>
+                        <div class="progress">
+                            <svg>
+                                <circle cx='38' cy='38' r='36'></circle>
+                            </svg>
+                            <div class="number">
+                                <p>44%</p>
+                            </div>
+                        </div>
+                    </div>
+                    <small class="text-muted">Ultimas 24 Horas</small>
+                </div>
+                <!-----------Fin Ingreso---------->
+            </div>
+            
+
+            <div class="accesos">
+                <div class="card clientes">
+                    <i class="fas fa-user-friends"></i>
+                    <h3>Clientes</h3>
+                    <a href="/vendedor/clientes"><button>Ver Detalles</button></a>
+                </div>
+                <div class="card ordenes">
+                    <i class="fas fa-shopping-cart"></i>
+                    <h3>Órdenes</h3>
+                    <a href="/vendedor/PEDIDO/LISTA"><button>Ver Detalles</button></a>
+                </div>
+                <div class="card productos">
+                    <i class="fas fa-box"></i>
+                    <h3>Productos</h3>
+                    <a href="/vendedor/product/all"><button>Ver Detalles</button></a>
+                </div>
+                <div class="card reportes">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>Reportes</h3>
+                    <a href="/vendedor/REPORTES"><button>Ver Detalles</button></a>
+                </div>
+            </div>
+            
+        </main>
+        
+        <div class="right">
+            <div class="top">
+              <button id="menu-btn">
+                <span class="material-icons-sharp">menu</span>
+              </button>
+              <div class="theme-toggler">
+                <span class="material-icons-sharp active">light_mode</span>
+                <span class="material-icons-sharp">dark_mode</span>
+              </div>
+            </div>
+            
+            <!-- Sección de lista de Chats -->
+            <div class="chat-list">
+              <div class="header">
+                <h2>Chats</h2>
+                <button id="newChatBtn" class="button">Nuevo Chat</button>
+              </div>
+              <div id="chatContainer">
+                <!-- Aquí se cargarán dinámicamente los chats -->
+              </div>
+            </div>
+            
+            <!-- Slider lateral para el chat seleccionado -->
+            <div id="chatSlider" class="chat-slider">
+              <div class="slider-header">
+                <h2 id="chatTitle"></h2>
+                <button id="closeSliderBtn">
+                  <span class="material-icons-sharp">close</span>
+                </button>
+              </div>
+              <div id="chatMessages" class="chat-messages">
+                <!-- Aquí se mostrarán los mensajes en tiempo real -->
+              </div>
+              <div class="chat-input">
+                <input type="text" id="messageInput" placeholder="Escribe un mensaje..." />
+                <button id="sendMessageBtn">
+                  <span class="material-icons-sharp">send</span>
+                </button>
+              </div>
+            </div>
+            
+            <!-- Modal personalizado para crear un nuevo chat -->
+            <div id="chatModal" class="modal">
+              <div class="modal-content">
+                <span id="closeModal" class="close">&times;</span>
+                <h2>Crear Nuevo Chat</h2>
+                <form id="newChatForm">
+                  <label for="chatName">Nombre del Chat:</label>
+                  <input type="text" id="chatName" name="chatName" required>
+                  <label for="user2Correo">Correo del Usuario:</label>
+                  <input type="email" id="user2Correo" name="user2Correo" required>
+                  <button type="submit">Crear Chat</button>
+                </form>
+              </div>
+            </div>
+          </div>
+
+    <script th:src="@{/js/dashboard/index.js}"></script>
+    <script th:src="@{/js/dashboard/chat.js}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.5.1/sockjs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+
+      
+    
+</body>
+</html>

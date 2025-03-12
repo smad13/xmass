@@ -1,0 +1,326 @@
+
+body {
+  font-family: 'Roboto', sans-serif;
+  
+}
+
+h1, h2, .product-card h5 {
+  font-family: 'Gasoek One', sans-serif;  
+  font-weight: 700;                      
+  font-size: 3rem;                   
+  color: #FF7F7F;                       
+  text-transform: uppercase;           
+  letter-spacing: 1.5px;                  
+
+  margin-bottom: 20px;                 
+}
+
+
+p, li {
+  font-family: 'Gasoek One', sans-serif;  
+color: #4A90E2;
+  font-weight: 400;
+  font-size: 1.2rem;                    
+  
+  line-height: 1.6;                   
+  margin-bottom: 15px;                   
+  transition: color 0.3s ease;           
+}
+
+p:hover, li:hover {
+  color: #FF7F7F; 
+  cursor: pointer;
+}
+
+.overlay {
+background-color: rgba(0, 0, 0, 0.5);
+}
+.promo {
+  display: flex;
+  gap: 30px; 
+  align-items: center;
+  padding: 0;
+  margin: 0% 5%;
+}
+
+.promo-item {
+  border: 2px solid #FF7F7F;
+  padding: 10px;
+  background-color: #FF7F7F;
+  border-radius: 5px;
+}
+
+
+.promo img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+
+  .container, .products-section, .info-section {
+    margin: 20px 0;
+    padding: 20px;
+}
+.product-card .product-card1 .paginado img {
+transition: transform 0.3s ease;
+}
+
+.product-card .product-card1 .paginado img:hover {
+transform: scale(1.05);
+}
+.btn-group .btn {
+border-radius: 30px; /* Bordes redondeados */
+background-color: #FFC1C1;
+background: linear-gradient(45deg,  #f5e6cc, #f8d7da); 
+color: #5a4a3f;
+font-weight: bold;
+padding: 10px 20px;
+margin: 0 10px; /* Espaciado entre botones */
+box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+transition: all 0.3s ease; /* Transición suave */
+
+}
+
+.btn-group .btn:hover {
+background: linear-gradient(45deg,  #f8d7da, #f5e6cc); /* Invertir gradiente en hover */
+transform: translateY(-2px); /* Efecto de elevación */
+box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2); /* Sombra más intensa */
+}
+/* Estilos personalizados */
+
+.container{
+  width: 0%;
+  
+  background-color: #f8f8f8;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 10px;
+
+ 
+}
+
+.main-image-container {
+  position: relative;
+  text-align: center;
+  
+}
+
+.main-image {
+  width: 100%;
+  max-height: 300px;
+  object-fit: cover;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.main-image-container:hover .overlay {
+  opacity: 1;
+}
+
+.main-button {
+  position: absolute;
+  top: 60%;
+  left: 20%;
+  transform: translate(-50%, -50%);
+}
+
+.products-section {
+  background-color: #ccc9c9;
+  padding: 20px;
+  text-align: center;
+}
+
+.carousel-container {
+  display: flex;
+  width: 100%;
+}
+
+.carousel-item {
+  display: flex;
+  width: 100%;
+  margin: 10px;
+}
+
+.left-image {
+  width: 50%;
+}
+
+.left-image img {
+  width: 100%;
+  height: auto;
+}
+
+
+.right-cards {
+  width: 50%;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.product-card {
+  width: 28%;
+margin: 5px;
+  background-color: #f8f8f8;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 10px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+.products-section.carousel-container {
+  display: flex;
+  justify-content: center;  /* Centra el contenedor */
+  align-items: center;      /* Alinea verticalmente */
+  width: 100%;              /* Asegura que ocupe todo el ancho de la página */
+  padding: 20px;            /* Agrega algo de espacio alrededor */
+}
+.btn1{
+  background-color: #FFC1C1;
+  border-radius: 30px; /* Bordes redondeados */
+background: linear-gradient(45deg,  #f5e6cc, #f8d7da); 
+color: #5a4a3f;
+font-weight: bold;
+padding: 10px 20px;
+margin: 0 10px; /* Espaciado entre botones */
+box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+transition: all 0.3s ease; /* Transición suave */
+}
+.row1 {
+  display: flex;
+  justify-content: center; /* Centra los elementos en la fila */
+  flex-wrap: wrap;         /* Permite que las imágenes se ajusten en varias filas si es necesario */
+  width: 100%;             /* Asegura que ocupe el 100% del contenedor */
+  max-width: 1200px;       /* Limita el ancho máximo de las imágenes */
+}
+
+.paginado {
+  width: 15%;
+  margin: 0% 3%;
+  border-radius: 100%;
+  background-color: #f8f8f8;
+  border: 1px solid #ddd;
+  padding: 30px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.paginado img {
+  width: 80%; /* Ajusta el tamaño de la imagen */
+  height: auto;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+
+.product-card1 {
+  width: 70%;
+margin: 5px;
+  background-color: #f8f8f8;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 10px;
+  text-align: center;
+  margin-bottom: 20px;
+  }
+  .product-card1 img {
+  width: 100%;
+  height: 2%;
+  object-fit: cover;
+}
+.product-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.product-card p {
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+.product-card span {
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.footer {
+  background-color: #343a40;
+  color: #ffffff;
+  padding: 20px;
+  text-align: center;
+}
+@media (max-width: 768px) {
+.product-card {
+  width: 100%;
+  margin-bottom: 10px;
+}
+}
+.product-card,.product-card1, .paginado, .main-image-container, .btn-group .btn {
+box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+transition: transform 0.3s ease;
+}
+
+.product-card:hover, .product-card1:hover,.paginado:hover, .main-image-container:hover, .btn-group .btn:hover {
+transform: scale(1.05);
+}
+.btn {
+transition: transform 0.3s;
+
+border-radius: 40px;
+}
+
+.btn:hover, .btn:hover {
+background-color: #FFC1C1;
+transform: scale(1.1);
+}
+
+.header-image {
+height: 150px;
+width: 150px;
+justify-content: center;
+}
+
+.icon-container {
+display: flex;
+justify-content: flex-end;
+gap: 10px;
+}
+
+.icon-image {
+width: 40px;
+height: 40px;
+}
+.icon-item {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.icon-text {
+  margin-top: 5px;
+  font-size: 14px;
+  color: #333;
+}
+
+
+.header{
+background-color: #F7EDE2;
+}
+.nav{
+
+background-color: #D1B28C;
+}
+ 

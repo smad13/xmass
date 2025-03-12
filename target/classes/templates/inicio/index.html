@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>XMAS</title>
+    <link rel="stylesheet" th:href="@{/css/inicio/style.css}">
+    <link rel="stylesheet" th:href="@{/css/inicio/carito.css}">
+
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/inicio/banner.css}">
+   <link href="https://fonts.googleapis.com/css2?family=Gasoek+One&display=swap" rel="stylesheet">
+
+
+   <style>
+    .carrito-sidebar {
+  position: fixed;
+  top: 0;
+  right: -350px;
+  width: 350px;
+  height: 100%;
+  background: #F7EDE2;
+  box-shadow: -2px 0 5px rgba(0,0,0,0.2);
+  transition: right 0.3s ease;
+  padding: 20px;
+  overflow-y: auto;
+  border-left: 3px solid #D1B28C;
+  z-index: 1000;
+}
+
+.carrito-sidebar.mostrar {
+  right: 0;
+}
+
+.icono-carrito {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #FF7F7F;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  z-index: 1100;
+}
+
+.icono-carrito img {
+  width: 40px;
+  height: 40px;
+}
+
+   </style>
+  </head>
+  <div class=" header">
+    <!-- Head con imagen, título y iconos -->
+    <div class="row align-items-center justify-content-center mt-3">
+      <div class="col-md-2 text-center">
+        <img th:src="@{/img/Log_peluches.png}" alt="Logo" class="header-image" />
+      </div>
+      <div class="col-md-8 text-center position-relative">
+        <h1 class="text">¡Encuentra tu Muñeco Perfecto!</h1>
+      </div>
+      <div class="col-md-2 text-right icon-container">
+        <div class="icon-item">
+          <a th:href="@{/login}"> <img th:src="@{/img/inicio/diseño/hat_3140126.png}" alt="Icono 1" class="icon-image" /></a>
+          <a th:href="@{/login}">
+            <p class="icon-text">Login</p>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Header con barra de navegación -->
+  <nav class="navbar navbar-expand-lg navbar-light nav mt-3">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item"><a class="nav-link" href="/index">Inicio</a></li>
+        <li class="nav-item"><a class="nav-link" href="/nosotros">Nosotros</a></li>
+        <li class="nav-item"><a class="nav-link" href="/catalogo">Nuestros Productos</a></li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" id="abrir-carrito">Carrito (<span id="cart-count">0</span>)</a>
+        </li>
+      </ul>
+      
+      <div class="btn-group ml-auto">
+        <a href="#ubicacion" class="btn btn-secondary">Ubicación</a>
+        <a href="#destadas" class="btn btn-secondary">Productos</a>
+        <a href="#" class="btn btn-secondary" data-toggle="modal" data-target="#contactModal">Contactanos</a>
+      </div>
+    </div>
+  </nav>
+  
+  <div class="modal fade" id="contactModal" tabindex="-1" aria-labelledby="contactModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="contactModalLabel">Contáctanos</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <!-- Logo a la izquierda -->
+            <div class="col-md-4 text-center bg-light d-flex align-items-center justify-content-center" style="border-right: 1px solid #ddd;">
+              <img th:src="@{/img/Log_peluches.png}" alt="Logo" class="img-fluid" style="max-width: 80%;">
+            </div>
+  
+            <!-- Formulario a la derecha -->
+            <div class="col-md-8 p-4" style="background-color: #f9f9f9;">
+              <form th:action="@{/contact/send}" method="post" style="max-width: 100%;">
+                <div class="mb-3">
+                  <label for="subject" class="form-label">Asunto:</label>
+                  <input type="text" id="subject" name="subject" class="form-control" placeholder="Ingrese el asunto" required="">
+                </div>
+                <div class="mb-3">
+                  <label for="content" class="form-label">Mensaje:</label>
+                  <textarea id="content" name="content" class="form-control" rows="4" placeholder="Escribe tu mensaje aquí" required=""></textarea>
+                </div>
+                <div class="d-grid gap-2">
+                  <button type="submit" class="btn btn-success btn-lg">Enviar</button>
+                  <button type="button" class="btn btn-secondary btn-lg" data-dismiss="modal">Cancelar</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+      <!--carrito con total -->
+  <div id="carrito-sidebar" class="carrito-sidebar">
+    <div class="carrito-header">
+      <h4>Tu Carrito</h4>
+      <button id="cerrar-carrito" class="btn btn-danger">X</button>
+    </div>
+    <div id="carrito-contenido">
+      <p>Tu carrito está vacío.</p>
+    </div>
+
+    <div class="carrito-footer">
+      <div class="total">
+        <span>Total: </span>
+        <span id="total-price">$0.00</span>
+      </div>
+      <button id="comprar-btn" class="btn btn-success" disabled>Comprar</button>
+    </div>
+    <div class="icono-carrito" id="icono-carrito">
+      <img src="/carrito-pedido" alt="Carrito">
+    </div>
+  </div>
+  <div class="icono-carrito" id="icono-carrito">
+    <img th:src="@{img/inicio/diseño/shopping-cart_8331063.png}" alt="Carrito">
+  </div>
+
+  
+
+  <!-- Imagen principal con botón central y superposición gris en hover -->
+  <div class="main-image-container mt-3">
+    <img th:src="@{/img/inicio/diseño/banner/inicio.jpg}" alt="Imagen principal" class="main-image" />
+    <div class="overlay"></div>
+    <button type="button" class="btn  main-button" data-toggle="modal" data-target="#mainImageModal">
+      Ver Imagen
+    </button>
+  </div>
+
+  <!-- Barra de navegación debajo de la imagen principal -->
+
+
+  <!-- Modal para la imagen principal -->
+  <div class="modal fade" id="mainImageModal" tabindex="-1" aria-labelledby="mainImageModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="mainImageModalLabel">
+            Imagen Principal
+          </h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <img th:src="@{/img/inicio/diseño/banner/inicio.jpg}" alt="Imagen Modal" class="img-fluid" />
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">
+            Cerrar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="products-section carousel-container">
+    <div class="row1">
+
+      <div class="paginado">
+        <p>HALLOWEN
+          <a href=""> <img th:src="@{/img/inicio/productos/Halloween/animales_calabaza.jpeg}" alt="Producto 1"></a>
+      </div>
+      <div class="paginado ">
+        <p>Animales
+          <a href=""> <img th:src="@{/img/inicio/productos/Animales/tigre.jpeg}" alt="Producto 1"></a>
+      </div>
+      <div class="paginado">
+        <p>San Valentin
+          <a href=""> <img th:src="@{/img/inicio/productos/SanValentin/oso_corazon.jpeg}" alt="Producto 1"></a>
+      </div>
+      <div class="paginado">
+        <p>Caricatura
+          <a href=""> <img th:src="@{/img/inicio/productos/Caricaturas/enojo.jpeg}" alt="Producto 1"></a>
+      </div>
+    </div>
+  </div>
+  <div class="products-section carousel-container">
+    <div class="promo">
+      <div class="promo-item">
+        <img th:src="@{/img/inicio/diseño/canvas/arcoiris.jpg}" alt="DESCUENTOS" class="header-image">
+      </div>
+      <div class="promo-item">
+        <img th:src="@{/img/inicio/diseño/canvas/niños .jpg}" alt="DESCUENTOS">
+      </div>
+    </div>
+  </div>
+
+  <!-- Sección de productos -->
+  <div class="products-section">
+    <h2>Productos Destacados</h2>
+    <div class="row justify-content-center">
+      <!-- Tarjeta 1 -->
+      <div class="col-md-3">
+        <div class="card product-card1">
+          <img th:src="@{/img/inicio/productos/Animales/elefante.png}" class="card-img-top" alt="Producto 1" />
+          <div class="card-body">
+            <h5 class="card-title"></h5>
+            <p class="card-text">Pinky</p>
+            <h5>$19.99</h5>
+            <button type="button" class="btn" data-toggle="modal" data-target="#modalProducto1">
+              Ver Más
+            </button>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="col-md-3">
+        <div class="card product-card1">
+          <img th:src="@{/img/inicio/productos/Animales/capibara.jpeg}" class="card-img-top" alt="Producto 1" />
+          <div class="card-body">
+
+            <p class="card-text">Capibara</p>
+            <h5>$25.500</h5>
+            <button type="button" class="btn" data-toggle="modal" data-target="#modalProducto1">
+              Ver Más
+            </button>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="col-md-3">
+        <div class="card product-card1">
+          <img th:src="@{/img/inicio/productos/Navidad/muñecos.jpg}" class="card-img-top"
+            alt="Producto 1" />
+          <div class="card-body">
+            <br>
+            <p class="card-text">Decoracion navideña</p>
+
+            <h5>$15.100</h5>
+
+            <button type="button" class="btn" data-toggle="modal" data-target="#modalProducto1">
+              Ver Más
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal Producto 1 -->
+      <div class="modal fade" id="modalProducto1" tabindex="-1" aria-labelledby="modalProducto1Label"
+        aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="modalProducto1Label">
+                Pinky
+              </h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <img th:src="@{/img/inicio/productos/Animales/elefante.png}" alt="Imagen Modal" class="img-fluid" />
+            <div class="modal-body">
+              Este tierno y suave elefante de peluche con un encantador moño rosado es el compañero perfecto para
+              abrazos y juegos.
+              <br>
+              Precio: $19.990
+              <br>
+              Tamaño: 30 cm
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                Cerrar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+
+    </div>
+    <br>
+    <a href=""><button class="btn1"> VER MAS -></button></a>
+  </div>
+  </div>
+  <div>
+    <div class="products-section">
+      <h2>Para los Enamorados </h2>
+      <div class="products-section carousel-container">
+
+        <div class="left-image">
+          <img th:src="@{/img/inicio/diseño/canvas/san_valentin.jpg}" alt="Imagen destacada de productos" class="header-image">
+        </div>
+        <div class="right-cards">
+          <div class="product-card">
+            <img th:src="@{/img/inicio/productos/Caricaturas/minion.png}" alt="Producto 1">
+              <p>Minions</p>
+              <span>$ 7.450</span>
+              <button class="btn col">MAS</button>
+          </div>
+          <div class="product-card">
+            <img th:src="@{/img/inicio/productos/Animales/osos.png}" alt="Producto 2">
+            <p>Osos </p>
+            <span>$ 24.900</span>
+            <button class="btn col">MAS</button>
+          </div>
+          <div class="product-card">
+            <img th:src="@{/img/inicio/productos/Animales/cerda.png}" alt="Producto 3">
+            <p>Cerdito</p>
+            <span>$ 89.900</span>
+            <button class="btn col">MAS</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+  </div>
+
+  <div class="products-section">
+    <div class="containerBanner">
+      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-container mySwiper">
+        <h2>Conoce Nuestros Productos </h2>
+        <br>
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <img th:src="@{img/inicio/productos/Animales/dos_pandas.jpeg}" alt="">
+            <div class="card-description">
+              <div class="card-title">
+                <p>Panda Doble</p>
+              </div>
+              <div class="card-text">
+                <h5>¡Doble la ternura, doble la diversión! Este adorable muñeco de dos osos panda apilados está diseñado
+                  para derretir corazones..</h3>
+              </div>
+              <div class="card-link">
+                <button type="button" class="btn" data-toggle="modal" data-target="#modalProducto1">
+                  Ver Más
+                </button>
+              </div>
+            </div>
+            
+          </div>
+          <div class="swiper-slide">
+            <img th:src="@{/img/inicio/productos/Caricaturas/stich.jpeg}" alt="">
+            <div class="card-description">
+              <div class="card-title">
+                <p>Stitch el Experto en Abrazos</p>
+              </div>
+              <div class="card-text">
+                <h5>Este adorable peluche de Stitch es el compañero perfecto para cualquier fanático de Lilo & Stitch..
+                  </h3>
+              </div>
+              <div class="card-link">
+                <button type="button" class="btn" data-toggle="modal" data-target="#modalProducto1">
+                  Ver Más
+                </button>
+              </div>
+            </div>
+
+          </div>
+          <div class="swiper-slide">
+            <img th:src="@{/img/inicio/productos/Halloween/oso_calabaza.jpeg}" alt="">
+
+            <div class="card-description">
+              <div class="card-title">
+                <p>Osos Calabaza</p>
+              </div>
+              <div class="card-text">
+                <h5>Dulce y espeluznante! Estos adorables osos de peluche vienen disfrazados de calabazas, listos para
+                  Halloween </h5>
+              </div>
+              <div class="card-link">
+                <button type="button" class="btn" data-toggle="modal" data-target="#modalProducto1">
+                  Ver Más
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <img th:src="@{/img/inicio/productos/Navidad/mas_muñecos.webp}" alt="">
+            <div class="card-description">
+              <div class="card-title">
+                <p>Muñecos de Navidad</p>
+              </div>
+              <div class="card-text">
+                <h5>¡La magia de la Navidad llega con estos muñecos festivos! Cada uno está cuidadosamente diseñado </p>
+              </div>
+              <div class="card-link">
+                <button type="button" class="btn" data-toggle="modal" data-target="#modalProducto1">
+                  Ver Más
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <img th:src="@{/img/inicio/productos/SanValentin/oso_corazon.jpeg}" alt="">
+            <div class="card-description">
+              <div class="card-title">
+                <p>Oso Amoroso</p>
+              </div>
+              <div class="card-text">
+                <h5>Este tierno y amoroso oso de peluche, llamado Oso Amoroso, lleva en sus manos un corazón rojo,
+                  simbolizando cariño y ternura.</p>
+              </div>
+              <div class="card-link">
+                <button type="button" class="btn" data-toggle="modal" data-target="#modalProducto1">
+                  Ver Más
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="swiper-slide">
+            <img th:src="@{/img/inicio/productos/Caricaturas/pokemon.jpeg}" alt="">
+
+            <div class="card-description">
+              <div class="card-title">
+                <p>Peluches De Pokemon
+                <p>
+              </div>
+              <div class="card-text">
+                <h5>Atrápalos a todos con estos adorables peluches de tus Pokémon favoritos! </p>
+              </div>
+              <div class="card-link">
+                <button type="button" class="btn" data-toggle="modal" data-target="#modalProducto1">
+                  Ver Más
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <br><br>
+    </div><button class="btn1"> VER MAS -></button>
+  </div>
+  <div>
+    <div class="products-section">
+      <h2>Lo mejor para los niños</h2>
+      <div class="products-section carousel-container">
+
+        <div class="left-image">
+          <img th:src="@{/img/inicio/diseño/canvas/niños .jpg}" alt="Imagen destacada de productos" class="header-image">
+        </div>
+        <div class="right-cards">
+          <div class="product-card">
+            <img th:src="@{/img/inicio/productos/Caricaturas/pantera_rosa.png}" alt="Producto 1">
+              <p>La Pantera Rosa</p>
+              <span>$ 7.450</span>
+              <button class="btn col">MAS</button>
+          </div>
+          <div class="product-card">
+            <img th:src="@{/img/inicio/productos/Animales/cocodrilo.png}" alt="Producto 2">
+            <p>Cocodrilo </p>
+            <span>$ 24.900</span>
+            <button class="btn col">MAS</button>
+          </div>
+          <div class="product-card">
+            <img th:src="@{/img/inicio/productos/Caricaturas/micky_wasawsky.jpeg}" alt="Producto 3">
+            <p>Mike Wazowski</p>
+            <span>$ 89.900</span>
+            <button class="btn col">MAS</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+  </div>
+
+  <div class="row info-section">
+    <!-- Contenedor de Google Maps (90%) -->
+    <div class="col map-container">
+      <h1 id="ubicacion" class="central">UBICANOS</h1>
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15905.347881544807!2d-74.13377281284183!3d4.711401600000005!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e3f9a34a49c79c5%3A0xe9d666142551c388!2sDetalles%20y%20Peluches!5e0!3m2!1sen!2sco!4v1731260317496!5m2!1sen!2sco"
+        width="100%" height="300" style="border: 0" allowfullscreen="" loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+  </div>
+<!-- Botón para abrir el modal -->
+
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script th:src="@{js/inicio/carrito.js}"></script>
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script th:src="@{js/banner.js}"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </body>
+</html>
