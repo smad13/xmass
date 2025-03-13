@@ -1,8 +1,6 @@
 package com.xmas.greet.modelo.venta;
 
-
 import org.hibernate.annotations.GenericGenerator;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -28,31 +26,34 @@ public class Product {
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     @Getter @Setter
     private String id;
+    
     @NotBlank @NotNull
     @Getter @Setter
     private String name;
+    
     @NotNull @DecimalMin(value = "0.1")
     @Getter @Setter
     private Double price;
+    
     @NotBlank @NotNull
     @Getter @Setter
     private String description;
+    
     @NotNull
     @Getter @Setter
-     @ManyToOne
+    @ManyToOne
     @JoinColumn(name = "category_id", nullable = false)
     private Category categoria;
+    
     @NotNull
     @Getter @Setter
     private int stock;  
 
     @Lob
     @Getter @Setter
-    @Column(name = "imagen", columnDefinition = "BYTEA")
+    @Column(name = "imagen", nullable = false, columnDefinition = "BYTEA")
     private byte[] imagen;
     
-
-
     @Getter @Setter
     @Transient
     private String base64Image;

@@ -8,13 +8,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.xmas.greet.modelo.venta.Product;
 
 public interface ProducRepository extends JpaRepository<Product,String >{
-
-   
     List<Product> findFirst4ByOrderByPriceAsc();
     void deleteById(String Id);
     Optional<Product> findById(String id);
     List<Product> findByNameContainingIgnoreCase(String name);
-
-
-    
 }
